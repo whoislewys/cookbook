@@ -21,7 +21,6 @@ class fibonacci():
             return cache[n]
 
 
-
 if __name__ == '__main__':
     fibonacci = fibonacci()
 
