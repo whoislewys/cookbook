@@ -23,21 +23,41 @@ def basic_knapsack(availableWeight, items, numItems):
 
 # Returns the maximum value that can be put in a knapsack of 
 def knapSack01(availableWeight, items, n):
-    # base case
     if n == 0 or availableWeight == 0 : 
+        # base case
         return 0
   
-    # If weight of the nth item is more than Knapsack of capacity 
-    # availableWeight, then this item cannot be included in the optimal solution 
     if (items[n-1].weight > availableWeight): 
+        # If weight of the nth item weighs more than the current knapsack capacity,
+        # move on to the next item
         return knapSack01(availableWeight, items, n-1) 
   
-    # return the maximum of two cases: 
-    # (1) nth item included 
-    # (2) not included 
     else: 
-        return max(items[n-1].value + knapSack01(availableWeight-items[n-1].weight, items, n-1), 
-                   knapSack01(availableWeight, items, n-1)) 
+        # return the maximum of two cases: 
+        # (1) nth item included 
+        # (2) not included 
+        temp1 = items[n-1].value + knapSack01(availableWeight-items[n-1].weight, items, n-1)
+        temp2 = knapSack01(availableWeight, items, n-1)
+        return max(temp1, temp2)
+
+
+# # Returns the maximum value that can be put in a knapsack of 
+# def knapSack01(availableWeight, items, n):
+#     # base case
+#     if n == 0 or availableWeight == 0 : 
+#         return 0
+  
+#     # If weight of the nth item is more than Knapsack of capacity 
+#     # availableWeight, then this item cannot be included in the optimal solution 
+#     if (items[n-1].weight > availableWeight): 
+#         return knapSack01(availableWeight, items, n-1) 
+  
+#     # return the maximum of two cases: 
+#     # (1) nth item included 
+#     # (2) not included 
+#     else: 
+#         return max(items[n-1].value + knapSack01(availableWeight-items[n-1].weight, items, n-1), 
+#                    knapSack01(availableWeight, items, n-1)) 
 
 
 if __name__ == '__main__':
