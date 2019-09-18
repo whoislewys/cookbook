@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class Item(object):
     weight = 0
     value = 0
@@ -53,9 +56,9 @@ def knapsack_01(availableWeight, items, n):
 
 # just use array for now
 def knapsack_01_memoized(availableWeight, items, n, memo):
-    if memo[availableWeight][n] != None:
+    if memo[availableWeight-1][n-1] != None:
         # before doiGng any calculation, check if the memo has done it already
-        return memo[availableWeight][n]
+        return memo[availableWeight-1][n-1]
 
     if n == 0 or availableWeight == 0 : 
         # base case
@@ -76,7 +79,7 @@ def knapsack_01_memoized(availableWeight, items, n, memo):
         temp2 = knapsack_01(availableWeight, items, n-1)
         result = max(temp1, temp2)
     # memoize this return value before returning it
-    memo[availableWeight][n] = result
+    memo[availableWeight-1][n-1] = result
     return result
 
 
@@ -107,6 +110,7 @@ if __name__ == '__main__':
     # solution = [1, 1, 1, 1, 0, 1, 0, 0, 0, 0]
     # total val: 309
     print(knapsack_01(capacity, items2, len(items2)))
-
+    # todo: figure out dimensionality of these bastards
     memo = [[None for i in range(capacity)] for i in range(len(items2))]
+    print(memo)
     print(knapsack_01_memoized(capacity, items2, len(items2), memo))
